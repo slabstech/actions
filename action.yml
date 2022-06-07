@@ -1,10 +1,10 @@
 name: "deploy-container-to-registry"
 description: "Deploys container to GithubContainer and DockerHub"
 inputs:
-  username:
+  docker-username:
     required: true
     description: "The secret key stored to deploy to docker hub"
-  password:
+  docker-password:
     required: true
     description: "The secret password to deploy to docker hub"
   project-name:
@@ -32,8 +32,8 @@ runs:
     - name: "Log in to Docker Hub"
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
+        username: ${{ inputs.docker-username }}
+        password: ${{ inputs.docker-password }}
 
     - name: "Log in to the Container registry"
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -47,7 +47,7 @@ runs:
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
         images: |
-          ${{ inputs.username }}/${{ inputs.project-name }}-${{ inputs.service-name }}
+          ${{ inputs.docker-username }}/${{ inputs.project-name }}-${{ inputs.service-name }}
           ghcr.io/${{ inputs.github-repository }}-${{ inputs.service-name }}
 
     - name: Build and push Docker image - client
