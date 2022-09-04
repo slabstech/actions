@@ -51,7 +51,7 @@ runs:
           ghcr.io/${{ inputs.github-repository }}-${{ inputs.service-name }}
 
     - name: Build and push Docker image - client
-      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      uses: docker/build-push-action@c84f38281176d4c9cdb1626ffafcd6b3911b5d94
       with:
         file: ${{ inputs.dockerfile-path }}
         push: true
